@@ -1,0 +1,9 @@
+(jbuild_version 1)
+
+(library
+  (
+    (name clarity)
+    (public_name clarity)
+    (ocamlopt_flags (:standard -rectypes -inline 100 -ccopt -ffast-math -O3))
+  )
+)

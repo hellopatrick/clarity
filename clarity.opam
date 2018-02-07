@@ -1,0 +1,18 @@
+opam-version: "1.2"
+maintainer: "patrick@donotforget.xyz"
+authors: ["Patrick Rogers"]
+license: "BSD-3-Clause"
+
+homepage: "https://github.com/hellopatrick/clarity"
+bug-reports: "https://github.com/hellopatrick/clarity/issues"
+dev-repo: "https://github.com/hellopatrick/clarity.git"
+
+build: [
+  ["jbuilder" "build" "--only" "clarity" "--root" "." "-j" jobs "@install"]
+]
+
+depends: [
+  "jbuilder" {build}
+]
+
+available: [ocaml-version >= "4.06"]

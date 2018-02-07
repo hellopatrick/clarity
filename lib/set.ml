@@ -8,16 +8,16 @@ sig
   val insert : elt -> t -> t
 end
 
-module Make (Elt : Ordered.S) : S with type elt = Elt.t =
+module Make (Elt : Ordered.S) =
 struct
   type elt = Elt.t
-  type t = Empty | Tree of t * elt * t
+  type t = elt Tree.t
 
-  let empty = Empty
+  let empty = Tree.Empty
 
   let rec member elt = function
-    | Empty -> false
-    | Tree (l, x, r) ->
+    | Tree.Empty -> false
+    | Tree.Node (l, x, r) ->
       match Elt.compare elt x with
       | Ordered.Equal -> true
       | Ordered.Less -> member elt l
@@ -31,12 +31,12 @@ struct
   let rec insert elt t =
     let rec aux t =
       match t with
-      | Empty -> Tree (Empty, elt, Empty)
-      | Tree (l, x, r) ->
+      | Tree.Empty -> Tree.Node (Empty, elt, Empty)
+      | Tree.Node (l, x, r) ->
         match Elt.compare elt x with
         | Ordered.Equal -> raise ElementExists
-        | Ordered.Less -> Tree (aux l, x, r)
-        | Ordered.Greater -> Tree (l, x, aux r)
+        | Ordered.Less -> Tree.Node (aux l, x, r)
+        | Ordered.Greater -> Tree.Node (l, x, aux r)
     in
     try aux t with ElementExists -> t
 end

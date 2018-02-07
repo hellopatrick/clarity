@@ -26,6 +26,8 @@ struct
 
   exception ElementExists
 
+  (* Exercise 2.3: raise exn if seen the item and return original set. *)
+
   let rec insert elt t =
     let rec aux t =
       match t with

@@ -1,16 +1,18 @@
-module type S =
-sig
+module type S = sig
   type elt
+
   type t
 
   val empty : t
+
   val member : elt -> t -> bool
+
   val insert : elt -> t -> t
 end
 
-module Make (Elt : Ordered.S) =
-struct
+module Make (Elt : Ordered.S) = struct
   type elt = Elt.t
+
   type t = elt Tree.t
 
   let empty = Tree.Empty

@@ -1,6 +1,6 @@
 (* *)
-
-module List = List
 module Ordered = Ordered
-module Set = Set
 module Tree = Tree
+module List = List
+module Set = Set
+module Map = Map

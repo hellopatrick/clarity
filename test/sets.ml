@@ -1,11 +1,11 @@
 module IntSet = Clarity.Set.Make (struct
-    type t = int
+  type t = int
 
-    let compare a b =
-      if a < b then Clarity.Ordered.Less
-      else if a = b then Clarity.Ordered.Equal
-      else Clarity.Ordered.Greater
-  end)
+  let compare a b =
+    if a < b then Clarity.Ordered.Less
+    else if a = b then Clarity.Ordered.Equal
+    else Clarity.Ordered.Greater
+end)
 
 let set = IntSet.(empty |> insert 4 |> insert 3 |> insert 10 |> insert 7)
 

@@ -10,7 +10,7 @@ module type S = sig
   val lookup : key -> 'a t -> 'a option
 end
 
-module Make (Key : Ordered.S) = struct
+module Make (Key : Ordered.S) : S with type key = Key.t = struct
   type key = Key.t
 
   type 'a t = (key * 'a) Tree.t

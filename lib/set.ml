@@ -10,7 +10,7 @@ module type S = sig
   val insert : elt -> t -> t
 end
 
-module Make (Elt : Ordered.S) = struct
+module Make (Elt : Ordered.S) : S with type elt = Elt.t = struct
   type elt = Elt.t
 
   type t = elt Tree.t

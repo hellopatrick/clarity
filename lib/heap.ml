@@ -45,16 +45,18 @@ module Make (Elt : Ordered.S) : S with type elt = Elt.t = struct
 
   let remove_min = function Empty -> Empty | Node (_, _, l, r) -> merge l r
 
-  (* exercise 3.3 *)
+  (*
+     exercise 3.3 -
+     states to NOT use `ListLabels.fold_left ~f:merge ~init:Empty hl`
+  *)
   let of_list l =
     let hl = ListLabels.map ~f:singleton l in
-    (* ListLabels.fold_left ~f:merge ~init:Empty hl *)
     let rec aux hl res =
       match hl with
       | [] -> res
       | [t] -> t::res
       | a::b::hl -> aux hl (merge a b::res)
-    in let rec aux' = function 
+    in let rec aux' = function
       | [] -> Empty
       | [t] -> t
       | hl -> aux' (aux hl [])
@@ -62,7 +64,7 @@ module Make (Elt : Ordered.S) : S with type elt = Elt.t = struct
 
   let to_list t =
     let rec aux t res =
-      match min t with 
+      match min t with
       | None -> res
       | Some m -> aux (remove_min t) (m::res)
     in aux t []

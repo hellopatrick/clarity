@@ -10,6 +10,9 @@ module type S = sig
 
   val min : t -> elt option
   val remove_min : t -> t
+
+  val of_list : elt list -> t
+  val to_list : t -> elt list
 end
 
 module Make (Elt : Ordered.S) : S with type elt = Elt.t

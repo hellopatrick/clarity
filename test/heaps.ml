@@ -19,7 +19,7 @@ let remove_min () =
     "find min" (Some 10) (IntHeap.min heap)
 
 let remove_all () =
-  let heap = heap 
+  let heap = heap
              |> IntHeap.remove_min
              |> IntHeap.remove_min
              |> IntHeap.remove_min
@@ -27,8 +27,20 @@ let remove_all () =
   Alcotest.(check (option int))
     "find min" (None) (IntHeap.min heap)
 
+let of_list () =
+  let heap = IntHeap.of_list [1;2;10;-1;2;5;3;0;1;-2;-3;5] in
+  Alcotest.(check (option int))
+    "find min" (Some (-3)) (IntHeap.min heap)
+
+let to_list () =
+  let heap = IntHeap.of_list [1;2;10;-1;2;5;3;0;1;-2;-3;5] in
+  let sorted_list = [10;5;5;3;2;2;1;1;0;-1;-2;-3] in
+  Alcotest.(check (list int))
+    "find min" sorted_list (IntHeap.to_list heap)
 
 let test_set =
   [("Find min in heap.", `Quick, min);
    ("Remove min from heap.", `Quick, remove_min);
-   ("Remove all from heap.", `Quick, remove_all);]
+   ("Remove all from heap.", `Quick, remove_all);
+   ("Build heap from list.", `Quick, of_list);
+   ("Convert heap to list", `Quick, to_list);]
